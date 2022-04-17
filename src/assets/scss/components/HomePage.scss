@@ -1,0 +1,10 @@
+.user-container {
+  background-color: $clr7;
+  height: 50vh;
+  color: $clr5;
+  &.flex {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

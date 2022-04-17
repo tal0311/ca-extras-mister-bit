@@ -1,0 +1,22 @@
+.contact-form {
+  background-color: $clr7;
+  padding: 1rem 2rem;
+  max-width: 50%;
+  justify-content: center;
+  margin: auto;
+  color:$clr5;
+  &.flex {
+    flex-direction: column;
+  }
+  label {
+    margin-top: 1rem;
+  }
+  .contact-name {
+    text-align: center;
+  }
+  button {
+   margin-top: 1rem;
+    align-self: flex-start;
+    width: 50%;
+  }
+}

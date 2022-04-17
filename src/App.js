@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './assets/scss/global.scss'
+// COMPONENTS
+import HomePage from './pages/HomePage/HomePage'
+import AppNav from './components/AppNav'
+import ContactDetails from './pages/ContactDetailsPage/ContactDetails'
+import EditAddContact from './pages/EditAddContact'
+import Filter from './components/Filter'
+// ROUTER
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import ContactList from './components/ContactList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <AppNav />
+
+        <section className='container'>
+          <Switch>
+            <Route path='/contact/edit/:id?' component={EditAddContact} />
+            <Route path='/contact/:id' component={ContactDetails} />
+            <Route path='/contact' component={ContactList} />
+            <Route path='/' component={HomePage} />
+          </Switch>
+        </section>
+      </Router>
+    )
+  }
 }
-
-export default App;

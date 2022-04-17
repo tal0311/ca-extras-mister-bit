@@ -1,0 +1,14 @@
+.nav {
+  background-color: $clr2;
+  width: 100%;
+  justify-content: space-between;
+  button {
+    @include button;
+  }
+
+  a.active {
+    button {
+      border-bottom: 1px solid $clr8;
+    }
+  }
+}

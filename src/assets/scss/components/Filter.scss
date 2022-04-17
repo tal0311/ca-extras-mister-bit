@@ -1,0 +1,20 @@
+.filter {
+  width: 100%;
+  background-color: $clr2;
+  border-bottom: 1px solid #fff;
+  input[type='search'] {
+    width: 100%;
+    padding: 0.8rem 0.5rem;
+    transition: 0.3s ease-in-out;
+    &:focus {
+      outline: 1px solid $clr8;
+      border: none;
+    }
+  }
+  .filter-go {
+    width: 10%;
+    background-color: transparent;
+    color: $clr5;
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,23 @@
+.contact-list {
+  background-color: $clr7;
+
+  .contact-preview {
+   padding: 1rem;
+    background-color: $clr2;
+    color: #fff;
+     border-bottom: 1px solid;
+    .contact-icon {
+      background-color: $clr8;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      align-self: center;
+      margin-inline-end: 1rem;
+     
+      &.flex {
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
