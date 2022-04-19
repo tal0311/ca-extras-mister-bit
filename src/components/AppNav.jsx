@@ -12,9 +12,9 @@ function AppNav() {
           <NavLink activeClassName='active' to='/contact'>
             <button>Contacts</button>
           </NavLink>
-          <NavLink activeClassName='active' exact to='/chart'>
+          {/* <NavLink activeClassName='active' exact to='/chart'>
             <button>chart</button>
-          </NavLink>
+          </NavLink> */}
         </div>
         <div className='add-contact'>
           <NavLink to='/contact/edit'>

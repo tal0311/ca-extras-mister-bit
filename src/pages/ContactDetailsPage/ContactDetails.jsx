@@ -20,6 +20,7 @@ class _ContactDetails extends Component {
   componentDidMount() {
     this.loadContact()
   }
+  
   loadContact = async () => {
     const contactId = this.props.match.params.id
     const contact = await contactService.getContactById(contactId)
@@ -45,16 +46,16 @@ class _ContactDetails extends Component {
     const amount = target.value
     this.setState({ amount })
   }
-  onTransfer = () => {
+  onTransfer = async () => {
     const { amount, contact } = this.state
     console.log(this.props)
-    // try {
-    this.props.spendBalance(amount, contact)
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    this.toggleTransfer()
+    try {
+      await this.props.spendBalance(amount, contact)
+      this.loadContact()
+      this.toggleTransfer()
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     const { contact, isTransfer } = this.state
@@ -99,10 +100,14 @@ class _ContactDetails extends Component {
                 contact={contact}
                 handleChange={this.handleChange}
                 onTransfer={this.onTransfer}
-                />
+              />
             </div>
           )}
-          <section className='movement-container'>{user.movements && <MoveList movements={user.movements} contactId={contact._id} />}</section>
+          <section className='movement-container'>
+            {user.movements && (
+              <MoveList movements={user.movements} contactId={contact._id} />
+            )}
+          </section>
         </section>
       </>
     )
