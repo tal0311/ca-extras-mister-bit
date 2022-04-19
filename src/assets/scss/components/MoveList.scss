@@ -1,0 +1,20 @@
+.movement-container {
+  width: 100%;
+
+  .movement-list {
+    margin: auto;
+
+    width: 75%;
+    h2 {
+      color: $clr5;
+    }
+    .move-preview {
+      background-color: $clr2;
+      color: $clr5;
+      margin: 0.2rem 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem 0;
+    }
+  }
+}

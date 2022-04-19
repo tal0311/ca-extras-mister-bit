@@ -1,4 +1,4 @@
-import { eventWrapper } from '@testing-library/user-event/dist/utils'
+
 import React, { Component } from 'react'
 // SERVICE
 import { contactService } from '../service/contactService'

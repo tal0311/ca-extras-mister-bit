@@ -1,0 +1,37 @@
+.founds-container {
+  background-color: $clr8;
+  margin-top: 1rem;
+  width: 75%;
+  color: $clr2;
+  .transfer-funds {
+    h4 {
+      padding: 1rem;
+    }
+    &.flex {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    > * {
+      margin-bottom: 0.5rem;
+    }
+    input[name='amount'] {
+      margin-inline-start: 0.5rem;
+      border: none;
+      border-bottom: 2px solid $clr2;
+      background-color: transparent;
+      outline: none;
+      &:focus {
+        background: none;
+      }
+    }
+    .actions-container {
+      padding-top: 0.5rem;
+      button {
+        @include button;
+        border: 1px solid $clr5;
+      }
+    }
+  }
+}

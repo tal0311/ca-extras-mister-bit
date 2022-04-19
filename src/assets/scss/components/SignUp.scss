@@ -1,0 +1,50 @@
+.signup-container {
+  background-color: $clr7;
+  padding: 1rem;
+  &.flex {
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    justify-self: center;
+    text-align: center;
+    color: $clr5;
+  }
+
+  input[name='name'] {
+    margin: 1rem 0;
+    width: 50%;
+    margin: auto;
+    padding: 0.2rem 1rem;
+
+    &::placeholder {
+      text-align: center;
+      font-size: larger;
+
+    }
+    &:focus{
+     outline: 2px solid $clr8;
+     border: none;
+    }
+  }
+
+  width: 50%;
+  height: 50vh;
+  margin: auto;
+
+  .user-icon {
+    margin: auto;
+    text-align: center;
+    background-color: $clr5;
+    color: $clr2;
+    border-radius: 50%;
+    font-size: 5rem;
+    width: 7rem;
+  }
+  .action-container {
+    text-align: center;
+    .signup-btn {
+      @include button;
+    }
+  }
+}

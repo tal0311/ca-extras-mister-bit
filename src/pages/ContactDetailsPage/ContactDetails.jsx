@@ -2,14 +2,22 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 // SERVICE
 import { contactService } from '../../service/contactService'
+// COMPONENTS
+import TransferFunds from '../../components/TransferFunds'
+import { MoveList } from '../../components/MoveList'
 
-export default class ContactDetails extends Component {
+// REDUX
+import { connect } from 'react-redux'
+import { spendBalance } from './../../store/actions/userActions'
+
+class _ContactDetails extends Component {
   state = {
     contact: null,
+    isTransfer: false,
+    amount: 0,
   }
 
   componentDidMount() {
-    console.log(this.props, this.props)
     this.loadContact()
   }
   loadContact = async () => {
@@ -28,8 +36,29 @@ export default class ContactDetails extends Component {
   back = () => {
     this.props.history.push('/contact')
   }
+  toggleTransfer = () => {
+    let { isTransfer } = this.state
+    isTransfer = !isTransfer
+    this.setState({ isTransfer })
+  }
+  handleChange = ({ target }) => {
+    const amount = target.value
+    this.setState({ amount })
+  }
+  onTransfer = () => {
+    const { amount, contact } = this.state
+    console.log(this.props)
+    // try {
+    this.props.spendBalance(amount, contact)
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    this.toggleTransfer()
+  }
   render() {
-    const { contact } = this.state
+    const { contact, isTransfer } = this.state
+    const { user } = this.props
     if (!contact) return <div>Loading...</div>
     const { _id, name, email, phone } = contact
 
@@ -57,11 +86,40 @@ export default class ContactDetails extends Component {
                 <button onClick={this.back} className='close-btn'>
                   <i className='fa-solid fa-rotate-left'></i>
                 </button>
+
+                <button onClick={this.toggleTransfer}>
+                  <i className='fa-solid fa-hand-holding-dollar'></i>
+                </button>
               </div>
             </div>
           </section>
+          {isTransfer && (
+            <div className='founds-container'>
+              <TransferFunds
+                contact={contact}
+                handleChange={this.handleChange}
+                onTransfer={this.onTransfer}
+                />
+            </div>
+          )}
+          <section className='movement-container'>{user.movements && <MoveList movements={user.movements} contactId={contact._id} />}</section>
         </section>
       </>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userModule.loggedInUser,
+  }
+}
+
+const mapDispatchToProps = {
+  spendBalance,
+}
+
+export const ContactDetails = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ContactDetails)

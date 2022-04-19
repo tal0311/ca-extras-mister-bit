@@ -1,32 +1,50 @@
 import React, { Component } from 'react'
-// service
-import { userService } from './../../service/userService'
+//COMPONENTS
+import {MoveList} from './../../components/MoveList'
 
-export default class HomePage extends Component {
-  state = {
-    user: null,
-  }
+// REDUX
+import { connect } from 'react-redux'
+import { loadUser } from '../../store/actions/userActions'
 
-  componentDidMount() {
+export class _HomePage extends Component {
+  componentDidMount = () => {
     this.loadUser()
   }
 
   loadUser = async () => {
-    const user = await userService.getUser()
-    this.setState({ user })
+    try {
+      await this.props.loadUser()
+    } catch (error) {
+      this.props.history.push('/signup')
+      console.log(this.props)
+    }
   }
 
   render() {
-    const { user } = this.state
-    if(!user) return <div>loading...</div>
+    const { user } = this.props
+    if (!user) return <div>loading...</div>
     return (
       <>
         <div className='user-container flex'>
           <h1>Hallo {user.name}</h1>
           <h4>coins: {user.coins}</h4>
-          <h4>$ {(user.coins / 0.00002502).toFixed(3)} </h4>
+          <h4>$ {(user.coins / 0.00002502).toFixed(0)} </h4>
+        
+          <section className='movement-container'>{user.movements && <MoveList movements={user.movements} contactId={null} />}</section>
         </div>
       </>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userModule.loggedInUser,
+  }
+}
+
+const mapDispatchToProps = {
+  loadUser,
+}
+
+export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_HomePage)
